@@ -4,7 +4,7 @@ from typing import List
 
 from config.database import get_db
 from models.user import User as UserModel
-from schemas.user import User as UserSchema
+from schemas.user import UserResponse as UserSchema
 from utils.utils import decode_access_token, is_token_blacklisted
 from fastapi.security import OAuth2PasswordBearer
 
