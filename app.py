@@ -7,7 +7,7 @@ from config.database import Base, engine, get_db
 # Importar todos los modelos para asegurar que se creen todas las tablas
 from models import User as UserModel, TokenBlacklist, Categoria, Proveedor, Ubicacion, Producto, Stock, TipoMovimiento, MovimientoInventario
 from schemas.token import Token
-from schemas.user import UserCreate
+from schemas.user import UserCreate, UserResponse
 from utils.utils import create_access_token, get_password_hash, verify_password, add_token_to_blacklist
 from routes import users, profile, categorias, proveedores, ubicaciones, productos, stocks, tipos_movimiento, movimientos
 
@@ -22,7 +22,7 @@ Base.metadata.create_all(bind=engine)
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
-@app.post("/signup", response_model=UserCreate)
+@app.post("/signup", response_model=UserResponse)
 async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(UserModel).filter(UserModel.username == user.username).first()
     if db_user:

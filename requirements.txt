@@ -27,6 +27,9 @@ pydantic_core==2.18.4
 Pygments==2.18.0
 PyJWT==2.8.0
 PyMySQL==1.1.1
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
 python-dotenv==1.0.1
 python-multipart==0.0.9
 PyYAML==6.0.1
