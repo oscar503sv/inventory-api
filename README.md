@@ -145,4 +145,4 @@ Este proyecto está activamente mantenido. Las nuevas características, correcci
 
 ## Licencia
 
-Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles. 
+Este proyecto está bajo la licencia GNU General Public License. Consulta el archivo [LICENSE](LICENSE) para más detalles. 
