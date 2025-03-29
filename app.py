@@ -4,13 +4,18 @@ from sqlalchemy.orm import Session
 from datetime import timedelta
 
 from config.database import Base, engine, get_db
-from models.user import User as UserModel, TokenBlacklist
+# Importar todos los modelos para asegurar que se creen todas las tablas
+from models import User as UserModel, TokenBlacklist, Categoria, Proveedor, Ubicacion, Producto, Stock, TipoMovimiento, MovimientoInventario
 from schemas.token import Token
 from schemas.user import UserCreate
 from utils.utils import create_access_token, get_password_hash, verify_password, add_token_to_blacklist
-from routes import users, profile
+from routes import users, profile, categorias, proveedores, ubicaciones, productos, stocks, tipos_movimiento, movimientos
 
-app = FastAPI()
+app = FastAPI(
+    title="Sistema de Inventario API",
+    description="API para la gestión de inventario de productos",
+    version="1.0.0"
+)
 
 # Crear tablas
 Base.metadata.create_all(bind=engine)
@@ -56,5 +61,13 @@ async def logout(token: str = Depends(oauth2_scheme), db: Session = Depends(get_
     add_token_to_blacklist(token, db)
     return {"msg": "Successfully logged out"}
 
+# Incluir rutas
 app.include_router(users.router, prefix="/admin", tags=["users"])
 app.include_router(profile.router, tags=["profile"])
+app.include_router(categorias.router)
+app.include_router(proveedores.router)
+app.include_router(ubicaciones.router)
+app.include_router(productos.router)
+app.include_router(stocks.router)
+app.include_router(tipos_movimiento.router)
+app.include_router(movimientos.router)

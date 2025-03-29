@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 from config.database import Base
 
 class User(Base):
@@ -11,6 +12,9 @@ class User(Base):
     email = Column(String(100), unique=True, index=True)
     hashed_password = Column(String(100))
     role = Column(String(50))
+    
+    # Esta relación es agregada por el backref en MovimientoInventario
+    # movimientos_registrados = relationship("MovimientoInventario", back_populates="usuario")
 
 class TokenBlacklist(Base):
     __tablename__ = 'token_blacklist'
